@@ -1,2 +1,406 @@
-   mkdir task-manager
-   cd task-manager
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StudentFreelance – Learn, Work & Earn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7ff;--cd:#fff;--tx:#0e1a3a;--mu:#4d515c;--p:#040a1a;--p2:#12b0ff;--bd:#e2e8f6;--ok:#0f9d58;--er:#d93025;--sf:#eaf1ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0a1226;--cd:#111c38;--tx:#e8eeff;--mu:#9aa8cc;--bd:#22305a;--sf:#16244a}
+}
+:root[data-theme=dark]{--bg:#0a1226;--cd:#111c38;--tx:#e8eeff;--mu:#9aa8cc;--bd:#22305a;--sf:#16244a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.6 'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{line-height:1.15;margin:0 0 12px}
+h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.5px}
+h3{font-size:17px}
+p{margin:0 0 10px}
+.w{max-width:1180px;margin:auto;padding:0 20px}
+.sec{padding:52px 20px}
+.mu{color:var(--mu)}
+:focus-visible{outline:2px solid var(--p);outline-offset:2px}
+#nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--cd);border-bottom:1px solid var(--bd)}
+.nb{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:19px;display:flex;gap:6px;align-items:center;color:var(--p)}
+nav{display:flex;gap:4px;align-items:center}
+nav a{padding:8px 12px;border-radius:8px;font-weight:500;color:var(--mu);cursor:pointer}
+nav a:hover{background:var(--sf);color:var(--p)}
+nav a.bp{color:#fff;padding:9px 16px}
+nav a.bp:hover{color:#fff;background:linear-gradient(135deg,var(--p),var(--p2))}
+.bdg{background:var(--er);color:#fff;border-radius:9px;font-size:11px;padding:1px 6px;margin-left:5px}
+.ib{background:none;border:0;color:var(--tx);cursor:pointer;display:none}
+.theme-toggle{width:40px;height:40px;border:1px solid var(--bd);border-radius:50%;background:var(--cd);color:var(--tx);cursor:pointer;display:grid;place-items:center;transition:.2s}
+.theme-toggle:hover{background:var(--sf);border-color:var(--p)}
+@media(max-width:820px){.ib{display:block}
+nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--cd);flex-direction:column;align-items:stretch;padding:12px;border-bottom:1px solid var(--bd)}
+.mo nav{display:flex}
+}
+.b{display:inline-flex;gap:6px;align-items:center;justify-content:center;padding:10px 18px;border-radius:10px;font:600 14px 'Plus Jakarta Sans',system-ui,sans-serif;border:1px solid transparent;cursor:pointer;transition:.2s}
+.bp{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 20px #1a274b44}
+.bo{background:var(--cd);border-color:var(--bd);color:var(--tx)}
+.bo:hover{border-color:var(--p);color:var(--p)}
+.sm{padding:6px 12px;font-size:13px}
+.lucide{width:16px;height:16px;vertical-align:-3px;margin-right:4px}
+.hero{background:radial-gradient(900px 380px at 85% -10%,#12b0ff33,transparent),linear-gradient(180deg,var(--sf),var(--bg));padding:76px 20px 56px}
+.hero .w>*{animation:up .6s both}
+.hero .w>*:nth-child(2){animation-delay:.08s}
+.hero .w>*:nth-child(3){animation-delay:.16s}
+.hero .w>*:nth-child(4){animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(14px)}
+}
+h1{font-size:clamp(34px,5.4vw,60px);letter-spacing:-1.6px;font-weight:800;max-width:15ch}
+.lead{font-size:18px;color:var(--mu);max-width:56ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
+.search{display:flex;gap:8px;background:var(--cd);padding:8px;border-radius:14px;border:1px solid var(--bd);max-width:620px;box-shadow:0 10px 30px #1d5bff18}
+input,select,textarea{width:100%;font:inherit;color:var(--tx);background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:10px 12px}
+.search input{border:0;outline:0}
+label{display:block;font-weight:600;font-size:13px;margin:12px 0 4px}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:20px;transition:.25s}
+.hv:hover{transform:translateY(-4px);box-shadow:0 14px 34px #1d5bff1c;border-color:#1d5bff66}
+.cat{display:grid;gap:4px;justify-items:start}
+.cat .lucide{width:28px;height:28px;color:var(--p);margin:0 0 6px}
+.tag,.sk,.pill{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--sf);color:var(--p)}
+.sk{color:var(--mu);font-weight:500}
+.pill.hired,.pill.done{background:#0f9d5822;color:var(--ok)}
+.pill.shortlisted{background:#f5a62333;color:#b36b00}
+.pill.rejected{background:#8883;color:var(--mu)}
+.t1{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.ds{color:var(--mu);font-size:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13px;color:var(--mu);margin:12px 0}
+.meta b{color:var(--p);font-size:18px}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;display:inline-grid;place-items:center;font-weight:800;object-fit:cover;flex:none}
+.av.xl{width:104px;height:104px;font-size:32px}
+.stars{color:#f5a623;letter-spacing:1px}
+.sb{background:linear-gradient(135deg,var(--p),#0a3bd1);color:#fff;padding:40px 20px}
+.sb .g{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));text-align:center}
+.sb b{font-size:36px;display:block}
+.step .lucide{width:26px;height:26px;color:var(--p);margin:0 0 8px}
+.two{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.two.r{grid-template-columns:270px 1fr}
+@media(max-width:900px){.two,.two.r,.msg{grid-template-columns:1fr!important}
+}
+.st{display:flex;gap:12px;align-items:center}
+.st .lucide{width:22px;height:22px;color:var(--p);margin:0}
+.st b{font-size:22px;display:block;line-height:1.1}
+.rw{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.rw:last-child{border:0}
+.bar{height:8px;background:var(--sf);border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--p2))}
+.err{background:#d9302516;border:1px solid var(--er);color:var(--er);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:14px}
+.err:empty{display:none}
+.auth{max-width:460px;margin:40px auto}
+.tabs{display:flex;gap:6px;margin-bottom:8px}
+.tabs a{flex:1;text-align:center;padding:9px;border-radius:10px;border:1px solid var(--bd);font-weight:600}
+.tabs a.on{background:var(--p);color:#fff;border-color:var(--p)}
+.demo{background:var(--sf);border-radius:10px;padding:10px 14px;font-size:13px;margin-top:14px}
+.otp-row{display:flex;gap:8px;align-items:center;margin:8px 0 0}
+.otp-status{display:block;margin-top:6px;font-size:12px;color:var(--mu)}
+#toast{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:grid;gap:8px}
+.t{background:var(--ok);color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 8px 24px #0004;animation:up .3s}
+.t.er{background:var(--er)}
+.md{position:fixed;inset:0;background:#0009;z-index:40;display:grid;place-items:center;padding:20px}
+.md>div{background:var(--cd);border-radius:16px;padding:24px;max-width:460px;width:100%;max-height:80vh;overflow:auto}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px;text-align:left;border-bottom:1px solid var(--bd);font-size:14px;white-space:nowrap}
+.msg{display:grid;grid-template-columns:260px 1fr;gap:16px}
+.th{height:380px;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:8px}
+.bub{max-width:78%;padding:9px 13px;border-radius:14px;background:var(--sf);font-size:14px}
+.bub.me{align-self:flex-end;background:var(--p);color:#fff}
+.bub small{display:block;opacity:.7;font-size:11px}
+.cv{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;cursor:pointer}
+.cv.on,.cv:hover{background:var(--sf)}
+.cta2{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;border-radius:22px;padding:44px 24px;text-align:center}
+.cta2 .bo{color:var(--p)}
+footer{background:#0b1533;color:#b7c3e6;padding:44px 20px 24px;margin-top:40px}
+footer h4{color:#fff;margin:0 0 10px}
+footer a{display:block;padding:3px 0}
+footer a:hover{color:#fff}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px}
+@media(max-width:700px){.fg{grid-template-columns:1fr 1fr}
+}
+.emp{text-align:center;grid-column:1/-1}
+ul.rq{padding-left:20px;margin:0}
+.chatbot-btn{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:24px;z-index:35;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px #1d5bff44;transition:.2s}
+.chatbot-btn:hover{transform:scale(1.08);box-shadow:0 12px 32px #1d5bff66}
+#chatbox{position:fixed;bottom:calc(96px + env(safe-area-inset-bottom,0px));right:24px;width:380px;height:560px;background:var(--cd);border-radius:16px;border:1px solid var(--bd);box-shadow:0 20px 60px #0004;z-index:36;display:flex;flex-direction:column;animation:slideUp .3s}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}
+}
+@media(max-width:500px){#chatbox{width:calc(100vw - 24px);max-width:100%;bottom:calc(80px + env(safe-area-inset-bottom,0px));right:12px;left:12px}
+}
+.chat-header{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:16px;border-radius:16px 16px 0 0;display:flex;justify-content:space-between;align-items:center}
+.chat-header h3{margin:0;font-size:16px}
+.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{display:flex;gap:8px;align-items:flex-end}
+.chat-msg.bot .chat-text{background:var(--sf);color:var(--tx);border-radius:12px 12px 12px 0}
+.chat-msg.user{justify-content:flex-end}
+.chat-msg.user .chat-text{background:var(--p);color:#fff;border-radius:12px 12px 0 12px}
+.chat-text{padding:10px 14px;font-size:14px;max-width:280px;word-wrap:break-word;line-height:1.4}
+.chat-footer{padding:12px;border-top:1px solid var(--bd);display:flex;gap:8px}
+.chat-footer input{margin:0;padding:8px 12px;font-size:13px}
+.chat-footer button{padding:8px 14px;margin:0}
+.chat-suggestions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.chat-sugg{font-size:12px;padding:8px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;cursor:pointer;text-align:center;transition:.2s}
+.chat-sugg:hover{background:var(--p);color:#fff;border-color:var(--p)}
+.kebab-menu{position:relative;display:inline-block}
+.kebab-btn{background:none;border:0;cursor:pointer;padding:8px;color:var(--p);font-size:20px;display:flex;align-items:center;justify-content:center}
+.kebab-btn:hover{color:var(--p2)}
+.kebab-dropdown{position:absolute;top:100%;right:0;background:var(--cd);border:1px solid var(--bd);border-radius:10px;min-width:180px;box-shadow:0 8px 24px #0004;z-index:50;display:none;flex-direction:column;animation:slideDown .2s}
+.kebab-dropdown.show{display:flex}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}
+}
+.kebab-item{padding:10px 14px;border:0;background:none;text-align:left;color:var(--tx);cursor:pointer;font-size:14px;display:flex;align-items:center;gap:8px;transition:.2s}
+.kebab-item:hover{background:var(--sf);color:var(--p)}
+.kebab-item:first-child{border-radius:10px 10px 0 0}
+.kebab-item:last-child{border-radius:0 0 10px 10px}
+.kebab-item i{width:16px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div id="nav"></div>
+<main id="app"></main>
+<div id="toast"></div>
+<button class="chatbot-btn" id="chatbot-btn" aria-label="Open AI Job Assistant" title="AI Job Assistant"><i data-lucide="message-circle"></i></button>
+<div id="chatbox" style="display:none">
+  <div class="chat-header">
+    <h3>💼 Job Match Assistant</h3>
+    <button class="ib" id="close-chat" aria-label="Close chat" style="margin:0;color:#fff"><i data-lucide="x"></i></button>
+  </div>
+  <div class="chat-body" id="chat-messages"></div>
+  <div class="chat-footer">
+    <input id="chat-input" type="text" placeholder="Type your message..." autocomplete="off">
+    <button id="chat-send" class="b bp sm" style="margin:0"><i data-lucide="send"></i></button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+
+<script>
+const $=s=>document.querySelector(s),e=s=>String(s??'').replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const LS={g:k=>{try{return localStorage.getItem(k)}catch(_){return null}},s:(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}},d:k=>{try{localStorage.removeItem(k)}catch(_){}}};
+let db,me=null,F={};
+const save=()=>LS.s('sf3',JSON.stringify(db)),go=h=>location.hash=h,id=()=>Math.random().toString(36).slice(2,9);
+const hash=async s=>{try{return[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode('sf$'+s)))].map(b=>b.toString(16).padStart(2,'0')).join('')}catch(_){return btoa('sf$'+s)}};
+const U=i=>db.users.find(u=>u.id==i),J=i=>db.jobs.find(j=>j.id==i),day=n=>new Date(Date.now()+n*864e5).toISOString().slice(0,10),inr=n=>'₹'+Number(n).toLocaleString('en-IN');
+function applyTheme(theme){const saved=theme||LS.g('sf_theme');const system=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';const selected=saved||system;document.documentElement.dataset.theme=selected;const btn=$('#theme-toggle');if(btn){btn.innerHTML=`<i data-lucide="${selected==='dark'?'sun':'moon'}"></i>`;btn.setAttribute('aria-label',selected==='dark'?'Switch to light mode':'Switch to dark mode');lucide.createIcons();}LS.s('sf_theme',selected)}
+function toggleTheme(){const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next)}
+const cats=[['Web Development','code-2'],['Design','palette'],['Writing','pen-line'],['Programming','terminal'],['Marketing','megaphone'],['Mobile Apps','smartphone'],['Video','clapperboard']];
+const stars=r=>'<span class=stars>'+'★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r))+'</span> '+Number(r).toFixed(1);
+const av=(u,c='')=>u.photo?`<img class="av ${c}" src="${e(u.photo)}" alt="${e(u.name)}">`:`<span class="av ${c}">${e(u.name.split(' ').map(x=>x[0]).slice(0,2).join(''))}</span>`;
+const nt=(to,text)=>db.notes.push({id:id(),to,text,t:Date.now(),read:false});
+const isSv=i=>me&&(db.saved[me.id]||[]).includes(i);
+const tags=a=>`<div class=tags>${a.map(s=>`<span class=sk>${e(s)}</span>`).join('')}</div>`;
+function toast(m,t=''){const d=document.createElement('div');d.className='t '+t;d.textContent=m;$('#toast').append(d);setTimeout(()=>d.remove(),3200)}
+function md(h){cm();const d=document.createElement('div');d.className='md';d.id='md';d.onclick=ev=>{if(ev.target==d)cm()};d.innerHTML=`<div>${h}<p style="text-align:right;margin-top:14px"><button class="b bo sm" onclick="cm()">Close</button></p></div>`;document.body.append(d);lucide.createIcons()}
+const cm=()=>$('#md')?.remove();
+
+async function seed(){
+const S=await hash('Student@123'),C=await hash('Client@123'),A=await hash('Admin@123');
+const st=[['Aarav Sharma','aarav@student.com','IIT Bombay','B.Tech Computer Science','React,Node.js,JavaScript,MongoDB,Figma',4.9,'Full-stack learner who ships clean, fast interfaces. Built 12+ projects for campus clubs and local startups.'],
+['Ishita Verma','ishita@student.com',"National Institute of Design",'B.Des Communication Design','Figma,UX Research,Illustrator,Branding,Photoshop',4.8,'Designer focused on friendly, accessible products and memorable brand identities.'],
+['Rohan Patil','rohan@student.com','VJTI Mumbai','BE Information Technology','Python,Java,Pandas,BeautifulSoup,Excel',4.7,'Backend and data enthusiast. I automate boring work with Python and clean data pipelines.'],
+['Meera Iyer','meera@student.com',"St. Xavier's College",'BA Mass Media','Copywriting,SEO,Instagram,Content Strategy,Canva',4.9,'Writer and social media strategist. I turn ideas into stories people want to share.'],
+['Kabir Singh','kabir@student.com','University of Mumbai','BSc Computer Science','Flutter,Dart,Firebase,Android,WordPress',4.6,'Mobile developer who loves building simple apps that solve everyday problems.'],
+['Zoya Ahmed','zoya@student.com','Whistling Woods International','BA Film & Video','Premiere Pro,After Effects,Color Grading,Reels,Photoshop',4.8,'Video editor with a sharp eye for pacing, sound and short-form storytelling.']];
+const cl=[['Riya Mehta','riya@beanbrew.com','Bean & Brew Café','Independent specialty café chain in Mumbai.'],['Arjun Rao','arjun@finnest.com','FinNest Labs','Fintech startup building tools for first-time investors.'],['Neha Kapoor','neha@shipkart.com','ShipKart','D2C logistics and e-commerce enabler.'],['Karan Shah','karan@pixelstudio.com','Pixel Studio','Boutique digital agency for growing brands.'],['Sana Khan','sana@greenleaf.org','GreenLeaf NGO','Non-profit focused on urban tree plantation.']];
+db={users:[],jobs:[],apps:[],saved:{},msgs:[],notes:[],reports:[],reviews:[]};
+st.forEach((s,i)=>db.users.push({id:'s'+i,role:'student',name:s[0],email:s[1],pw:S,college:s[2],course:s[3],skills:s[4].split(','),rating:s[5],bio:s[6],edu:s[3]+', '+s[2]+' (2022–2026)',certs:'Google Career Certificate in '+s[4].split(',')[0],exp:'Freelance and campus projects, 2023–present',photo:'',portfolio:[{t:'Campus Events Project',d:'Used by 2,000+ students across the college.'},{t:'Client Sample Work',d:'Delivered for a local small business.'}]}));
+cl.forEach((c,i)=>db.users.push({id:'c'+i,role:'client',name:c[0],email:c[1],pw:C,company:c[2],about:c[3],photo:''}));
+db.users.push({id:'a0',role:'admin',name:'Admin',email:'admin@studentfreelance.com',pw:A,photo:''});
+const jb=[['Website design for a café brand','Design','Figma,HTML,CSS',12000,'Beginner','Fixed','Design a warm, modern 5-page website for our café chain, including menu and reservations sections.','Responsive mockups\nMenu page\nHandoff files'],
+['React dashboard for investors','Web Development','React,JavaScript,CSS',25000,'Intermediate','Fixed','Build a responsive portfolio dashboard with charts and filters from our existing API.','Reusable components\nChart library\nUnit tests'],
+['Node.js REST API for orders','Programming','Node.js,Express,MongoDB',30000,'Intermediate','Fixed','Create secure REST endpoints for orders, shipments and users with JWT authentication.','API docs\nAuth\nDeployment guide'],
+['Logo design for a startup','Design','Illustrator,Branding',5000,'Beginner','Fixed','We need a clean, memorable logo with two colour variants and a small brand guide.','3 concepts\nVector files'],
+['Social media graphics pack','Design','Photoshop,Canva',6000,'Beginner','Fixed','Design 20 Instagram posts and stories for our tree plantation campaign.','Editable templates\nBrand colours'],
+['Blog writing: 10 SEO articles','Writing','Copywriting,SEO',8000,'Intermediate','Fixed','Write ten 800-word articles about coffee culture with keyword research included.','Original content\nMeta descriptions'],
+['Data entry for product catalogue','Programming','Excel,Data Entry',3500,'Beginner','Part-time','Enter and clean 500 product records in a structured spreadsheet with consistent naming.','99% accuracy\nGoogle Sheets'],
+['Python web scraper for prices','Programming','Python,BeautifulSoup,Pandas',15000,'Intermediate','Fixed','Scrape competitor prices daily and export a clean CSV report automatically.','Scheduled script\nREADME'],
+['Java inventory desktop app','Programming','Java,JavaFX,SQL',18000,'Intermediate','Fixed','Develop a simple stock management app with login, reports and SQLite storage.','Source code\nUser guide'],
+['Monthly social media manager','Marketing','Instagram,Content Strategy,Canva',10000,'Beginner','Part-time','Plan and post 12 times per month, reply to comments and share a weekly report.','Content calendar\nWeekly report'],
+['Promo video editing (60 sec)','Video','Premiere Pro,After Effects',7000,'Intermediate','Fixed','Edit raw footage into a punchy 60-second promo with captions, music and motion graphics.','Two formats\nSubtitles'],
+['UI/UX redesign of booking app','Design','Figma,UX Research',22000,'Advanced','Fixed','Audit our booking flow, run five user interviews and deliver a clickable prototype.','Research summary\nPrototype'],
+['WordPress site for an NGO','Web Development','WordPress,PHP,Elementor',14000,'Beginner','Fixed','Build a donation-ready WordPress site with events, blog and volunteer sign-up form.','Mobile ready\nAdmin training'],
+['Digital marketing campaign','Marketing','SEO,Google Ads,Analytics',16000,'Advanced','Fixed','Plan and run a 4-week paid and organic campaign to grow newsletter sign-ups.','Ad accounts setup\nFinal report'],
+['Flutter app for local deliveries','Mobile Apps','Flutter,Firebase,Dart',35000,'Advanced','Fixed','Build a Flutter app for order tracking with push notifications and Firebase auth.','Android build\nSource code']];
+jb.forEach((j,i)=>db.jobs.push({id:'j'+i,title:j[0],cat:j[1],skills:j[2].split(','),budget:j[3],level:j[4],type:j[5],desc:j[6],reqs:j[7].split('\n'),client:'c'+i%5,deadline:day(i==0?-10:6+i*2),status:'open',hired:null,n:2+i%5*2}));
+[['j0','s0','hired'],['j2','s0','hired'],['j11','s1','hired'],['j1','s0','pending'],['j1','s4','pending'],['j12','s0','shortlisted'],['j12','s4','pending'],['j3','s1','shortlisted'],['j5','s3','pending'],['j7','s2','pending'],['j14','s4','pending'],['j10','s5','pending']].forEach(a=>{const j=J(a[0]);db.apps.push({id:id(),job:a[0],student:a[1],proposal:'I have built similar projects and can deliver on time with clear weekly updates.',bid:Math.round(j.budget*.95),status:a[2]});if(a[2]=='hired'){j.status='active';j.hired=a[1]}});
+J('j0').status='done';
+db.reviews.push({student:'s0',by:'c0',rating:5,text:'Delivered ahead of schedule and the design was spot on.'},{student:'s1',by:'c1',rating:5,text:'Thoughtful research and a beautiful prototype.'},{student:'s2',by:'c2',rating:4,text:'Reliable and communicates well.'});
+db.msgs.push({id:id(),from:'c0',to:'s0',text:'Loved the café site! Can you add a gallery page?',t:Date.now()-36e5,read:false},{id:id(),from:'c2',to:'s0',text:'Hi Aarav, how is the orders API coming along?',t:Date.now()-72e5,read:true});
+nt('s0','Riya Mehta sent you a message.');nt('s0','Your proposal for "Flutter app" was viewed.');nt('c0','Aarav Sharma completed "Website design for a café brand".');
+db.reports.push({id:id(),job:'j6',by:'s2',reason:'Budget looks too low for the amount of work.',status:'open'})}
+
+/* ---------- ROUTER ---------- */
+function nav(){const n=me?db.notes.filter(x=>x.to==me.id&&!x.read).length:0,m=me?db.msgs.filter(x=>x.to==me.id&&!x.read).length:0,b=x=>x?`<span class=bdg>${x}</span>`:'';
+$('#nav').innerHTML=`<div class="w nb"><a class=logo href="#/"><i data-lucide=graduation-cap></i>StudentFreelance</a><button class=ib aria-label=Menu onclick="document.body.classList.toggle('mo')"><i data-lucide=menu></i></button><nav><a href="#/jobs">Find jobs</a><a href="#/students">Students</a><button class="theme-toggle" id="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle theme"><i data-lucide="${document.documentElement.dataset.theme==='dark'?'sun':'moon'}"></i></button>`+(me?`<a href="#/${me.role=='admin'?'admin':'dashboard'}">Dashboard</a><a href="#/messages">Messages${b(m)}</a><a href="#/notifications">Alerts${b(n)}</a><a href="#/profile">Profile</a><a class="b bo sm" onclick="logout()">Log out</a>`:`<a href="#/login">Log in</a><a class="b bp" href="#/register">Sign up</a>`)+`</nav></div>`}
+function R(keep){document.body.classList.remove('mo');const[h,q]=(location.hash||'#/').slice(2).split('?'),[p,a]=h.split('/'),Q=new URLSearchParams(q||'');
+const need=r=>{if(!me){go('#/login');toast('Please log in to continue','er');return 1}if(r&&me.role!=r){go('#/');toast('You do not have access to that page','er');return 1}};let v;
+switch(p){case'':v=home();break;case'jobs':v=jobsP(Q);break;case'job':v=jobP(a);break;case'students':v=studentsP();break;case'student':v=profP(a);break;case'login':v=login();break;case'register':v=reg(Q.get('r'));break;case'reset':v=reset();break;
+case'dashboard':if(need())return;v=me.role=='admin'?admin():me.role=='client'?cDash():sDash();break;case'admin':if(need('admin'))return;v=admin();break;
+case'messages':if(need())return;v=msgP(Q.get('to'));break;case'notifications':if(need())return;v=notesP();break;case'profile':if(need())return;v=editP();break;
+default:v='<div class="w sec"><h2>Page not found</h2><a class="b bp" href="#/">Back to home</a></div>'}
+$('#app').innerHTML=v+foot();nav();applyTheme();lucide.createIcons();if(!keep)scrollTo(0,0);const t=$('.th');if(t)t.scrollTop=t.scrollHeight;
+document.querySelectorAll('.kebab-btn').forEach(btn=>{btn.onclick=ev=>{ev.stopPropagation();const menu=btn.nextElementSibling;document.querySelectorAll('.kebab-dropdown').forEach(m=>m!==menu&&m.classList.remove('show'));menu.classList.toggle('show')}});
+document.addEventListener('click',ev=>{if(!ev.target.closest('.kebab-menu')){document.querySelectorAll('.kebab-dropdown').forEach(m=>m.classList.remove('show'))}})}
+const foot=()=>`<footer><div class="w fg"><div><h4>StudentFreelance</h4><p>Learn, work and earn while you study. Real projects for real students.</p></div><div><h4>Students</h4><a href="#/jobs">Browse jobs</a><a href="#/register">Create profile</a></div><div><h4>Clients</h4><a href="#/register?r=client">Post a project</a><a href="#/students">Find talent</a></div><div><h4>Company</h4><a href="#/">About</a><a href="#/">Support</a></div></div><div class=w style="margin-top:24px;font-size:13px">© BY Rehan & Yogita.</div></footer>`;
+
+function logout(){me=null;LS.d('sf3s');toast('You have been logged out');go('#/');R()}
+
+/* ---------- COMPONENTS ---------- */
+const jc=j=>{const c=U(j.client);return`<article class="c hv"><div class=t1><span class=tag>${e(j.cat)}</span><span class=mu>${e(j.type)}</span></div><h3><a href="#/job/${j.id}">${e(j.title)}</a></h3><p class=mu><i data-lucide=building-2></i>${e(c.company)}</p><p class=ds>${e(j.desc)}</p>${tags(j.skills)}<div class=meta><b>${inr(j.budget)}</b><span><i data-lucide=calendar></i>${j.deadline}</span><span><i data-lucide=users></i>${j.n+db.apps.filter(a=>a.job==j.id).length} applicants</span><span><i data-lucide=signal></i>${e(j.level)}</span></div><div class=act><button class="b bp" onclick="ap('${j.id}')">Apply now</button><button class="b bo" onclick="sv('${j.id}')"><i data-lucide=${isSv(j.id)?'bookmark-check':'bookmark'}></i>${isSv(j.id)?'Saved':'Save job'}</button></div></article>`};
+const sc=u=>`<article class="c hv"><div class=st>${av(u)}<div><h3 style="margin:0"><a href="#/student/${u.id}">${e(u.name)}</a></h3><span class=mu>${e(u.college)}</span></div></div><p class=mu style="margin:10px 0 6px">${e(u.course)}</p>${tags(u.skills.slice(0,4))}<div class=meta>${stars(u.rating)}<span><i data-lucide=check-circle-2></i>${db.jobs.filter(j=>j.hired==u.id&&j.status=='done').length} completed</span></div><a class="b bo sm" href="#/student/${u.id}">View profile</a></article>`;
+const stat=(i,l,v)=>`<div class="c st"><i data-lucide=${i}></i><div><b>${v}</b><span class=mu>${l}</span></div></div>`;
+const rw=(a,b,c)=>`<div class=rw><div>${a}<div class=mu style="font-size:13px">${b||''}</div></div><div>${c||''}</div></div>`;
+const empty=t=>`<p class=mu>${t}</p>`;
+const pct=u=>{const c=[u.bio,u.photo,u.skills.length>=3,u.edu,u.certs,u.exp,u.portfolio.length,u.college];return Math.round(c.filter(Boolean).length/c.length*100)};
+const fe=er=>{$('#fe').innerHTML=er.map(x=>'<div>• '+e(x)+'</div>').join('');if(er.length)$('#fe').scrollIntoView({block:'center'})};
+const EM=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,PW=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/,PWM='Password must be 8+ characters with upper and lower case letters, a number and a symbol.';
+
+/* ---------- HOME ---------- */
+function home(){const S=db.users.filter(u=>u.role=='student'),C=db.users.filter(u=>u.role=='client'),dn=db.jobs.filter(j=>j.status=='done');
+const step=(i,t,d)=>`<div class="c step"><i data-lucide=${i}></i><h3>${t}</h3><p class=mu>${d}</p></div>`,tm=(t,n,r)=>`<div class=c><div class=stars>★★★★★</div><p>${t}</p><b>${n}</b><div class=mu>${r}</div></div>`;
+return`<section class=hero><div class=w><h1>Turn Your Skills Into Real Opportunities</h1><p class=lead>StudentFreelance connects college students with clients who need design, code, writing and marketing help. Build a portfolio, earn real money and grow before graduation.</p><div class=cta><a class="b bp" href="#/jobs"><i data-lucide=search></i>Find jobs</a><a class="b bo" href="#/register?r=client"><i data-lucide=briefcase></i>Hire students</a></div><form class=search onsubmit="go('#/jobs?q='+encodeURIComponent(this.q.value));return false"><input name=q placeholder="Search jobs or skills, e.g. React, logo, SEO" aria-label="Search jobs"><button class="b bp">Search</button></form></div></section>
+<section class="w sec"><h2>Popular categories</h2><div class=g>${cats.map(([n,i])=>`<a class="c hv cat" href="#/jobs?cat=${encodeURIComponent(n)}"><i data-lucide=${i}></i><b>${n}</b><span class=mu>${db.jobs.filter(j=>j.cat==n&&j.status=='open').length} open jobs</span></a>`).join('')}</div></section>
+<section class="w sec" style="padding-top:0"><h2>Featured freelance jobs</h2><div class=g>${db.jobs.filter(j=>j.status=='open').slice(0,6).map(jc).join('')}</div><p style="margin-top:18px"><a class="b bo" href="#/jobs">View all jobs</a></p></section>
+<section class="w sec" style="padding-top:0"><h2>Top student freelancers</h2><div class=g>${[...S].sort((a,b)=>b.rating-a.rating).slice(0,4).map(sc).join('')}</div></section>
+<section class="w sec"><h2>How it works</h2><div class=g>${step('user-plus','Create your profile','Students add skills and portfolio. Clients add company details.')}${step('search','Find or post work','Browse jobs and send proposals, or post a project in minutes.')}${step('messages-square','Collaborate','Shortlist, message and hire the right student.')}${step('wallet','Deliver and earn','Complete the project, get rated and build your reputation.')}</div></section>
+<section class=sb><div class="w g"><div><b>${S.length}</b>Student freelancers</div><div><b>${C.length}</b>Verified clients</div><div><b>${db.jobs.length}</b>Projects posted</div><div><b>${inr(dn.reduce((a,j)=>a+j.budget,0))}</b>Paid to students</div></div></section>
+<section class="w sec"><h2>What our community says</h2><div class=g>${tm('“I landed my first paid project in my second year and now my portfolio speaks for me.”','Aarav Sharma','IIT Bombay student')}${tm('“We hired two designers here. Fresh ideas, fair prices and great communication.”','Riya Mehta','Bean & Brew Café')}${tm('“Clear briefs and quick payments. It feels like a real freelancing career.”','Meera Iyer','St. Xavier’s student')}</div></section>
+<section class="w sec" style="padding-top:0"><div class=cta2><h2>Ready to start?</h2><p>Join students and clients building real work together.</p><div class=cta style="justify-content:center"><a class="b bo" href="#/register">Join as a student</a><a class="b bo" href="#/register?r=client">Join as a client</a></div></div></section>`}
+
+/* ---------- JOBS ---------- */
+const jl=()=>{const r=db.jobs.filter(j=>j.status=='open'&&(!F.cat||j.cat==F.cat)&&(!F.lvl||j.level==F.lvl)&&(!F.type||j.type==F.type)&&j.budget<=F.max&&(!F.skill||j.skills.some(s=>s.toLowerCase().includes(F.skill.toLowerCase())))&&(!F.q||(j.title+j.cat+j.desc+j.skills.join()).toLowerCase().includes(F.q.toLowerCase())));return`<p class=mu style="grid-column:1/-1;margin:0">${r.length} jobs found</p>`+(r.length?r.map(jc).join(''):'<div class="c emp"><h3>No jobs match your filters</h3><p class=mu>Try clearing a filter or searching a broader skill.</p></div>')};
+const dj=()=>{$('#jl').innerHTML=jl();lucide.createIcons()};
+const opt=(a,v)=>'<option value="">Any</option>'+a.map(x=>`<option${x==v?' selected':''}>${x}</option>`).join('');
+function jobsP(Q){F={q:Q.get('q')||'',cat:Q.get('cat')||'',skill:'',max:50000,lvl:'',type:''};
+return`<div class="w sec"><h2>Browse freelance jobs</h2><div class="two r"><aside class=c><h3>Filters</h3><label>Keyword</label><input value="${e(F.q)}" oninput="F.q=this.value;dj()" placeholder="Title or keyword"><label>Category</label><select onchange="F.cat=this.value;dj()">${opt(cats.map(c=>c[0]),F.cat)}</select><label>Skill</label><input oninput="F.skill=this.value;dj()" placeholder="e.g. Python"><label>Max budget: <span id=bv>${inr(50000)}</span></label><input type=range min=1000 max=50000 step=1000 value=50000 oninput="F.max=+this.value;$('#bv').textContent=inr(this.value);dj()"><label>Experience level</label><select onchange="F.lvl=this.value;dj()">${opt(['Beginner','Intermediate','Advanced'])}</select><label>Job type</label><select onchange="F.type=this.value;dj()">${opt(['Fixed','Part-time'])}</select><p style="margin-top:14px"><button class="b bo sm" onclick="location.hash='#/jobs';R()">Clear filters</button></p></aside><div id=jl class=g>${jl()}</div></div></div>`}
+function ap(i){if(!me){toast('Log in as a student to apply','er');return go('#/login')}if(me.role!='student')return toast('Only students can apply for jobs','er');go('#/job/'+i)}
+function sv(i){if(!me){toast('Log in to save jobs','er');return go('#/login')}const a=db.saved[me.id]=db.saved[me.id]||[],k=a.indexOf(i);k<0?a.push(i):a.splice(k,1);save();toast(k<0?'Job saved':'Job removed from saved');location.hash.startsWith('#/jobs')?(dj(),nav()):R(1)}
+function jobP(i){const j=J(i);if(!j)return'<div class="w sec"><h2>Job not found</h2></div>';const c=U(j.client),mine=me&&db.apps.find(a=>a.job==i&&a.student==me.id);
+const form=!me?`<a class="b bp" href="#/login">Log in to apply</a>`:me.role!='student'?empty('Only students can submit proposals.'):j.status!='open'?empty('This project is no longer accepting proposals.'):mine?`<p>You applied: <span class="pill ${mine.status}">${mine.status}</span></p><p class=mu>Your bid: ${inr(mine.bid)}</p>`:`<form onsubmit="return prop(event,'${i}')"><div class=err id=fe></div><label>Cover letter / proposal</label><textarea name=cover rows=5 placeholder="Explain why you are a great fit and how you will deliver."></textarea><label>Your bid (₹)</label><input name=bid type=number min=1 value="${j.budget}"><p style="margin-top:14px"><button class="b bp">Submit proposal</button></p></form>`;
+return`<div class="w sec"><a class=mu href="#/jobs"><i data-lucide=arrow-left></i>All jobs</a><div class="two" style="margin-top:14px"><div><div class=c><span class=tag>${e(j.cat)}</span> <span class="pill ${j.status}">${j.status}</span><h2 style="margin-top:10px">${e(j.title)}</h2><p>${e(j.desc)}</p><h3>Required skills</h3>${tags(j.skills)}<h3 style="margin-top:16px">Project requirements</h3><ul class=rq>${j.reqs.map(r=>`<li>${e(r)}</li>`).join('')}</ul></div><div class=c style="margin-top:18px"><h3>Submit a proposal</h3>${form}</div></div><aside class=c><div class=meta><b>${inr(j.budget)}</b><span>${e(j.type)}</span></div>${rw('Deadline',j.deadline)}${rw('Experience',j.level)}${rw('Applicants',j.n+db.apps.filter(a=>a.job==i).length)}<h3 style="margin-top:14px">About the client</h3><div class=st>${av(c)}<div><b style="font-size:16px">${e(c.company)}</b><span class=mu>${e(c.name)}</span></div></div><p class=mu style="margin-top:8px">${e(c.about)}</p><div class=act><button class="b bo sm" onclick="sv('${i}')"><i data-lucide=bookmark></i>${isSv(i)?'Saved':'Save job'}</button>${me&&me.role=='student'?`<a class="b bo sm" href="#/messages?to=${c.id}">Contact</a>`:''}<button class="b bo sm" onclick="rep('${i}')"><i data-lucide=flag></i>Report</button></div></aside></div></div>`}
+function prop(ev,i){ev.preventDefault();const f=ev.target,c=f.cover.value.trim(),b=+f.bid.value,er=[];if(c.length<30)er.push('Write a proposal of at least 30 characters.');if(!(b>0))er.push('Enter a bid greater than zero.');if(er.length)return fe(er),false;const j=J(i);db.apps.push({id:id(),job:i,student:me.id,proposal:c,bid:b,status:'pending'});nt(j.client,`${me.name} applied to "${j.title}".`);save();toast('Proposal submitted successfully');R(1);return false}
+function rep(i){if(!me){toast('Log in to report a job','er');return go('#/login')}const r=prompt('Why are you reporting this job?');if(r&&r.trim().length>4){db.reports.push({id:id(),job:i,by:me.id,reason:r.trim(),status:'open'});save();toast('Report sent to the admin team')}else if(r!==null)toast('Please describe the issue (5+ characters)','er')}
+
+/* ---------- STUDENTS ---------- */
+const studentsP=()=>`<div class="w sec"><h2>Student freelancers</h2><div class=g>${db.users.filter(u=>u.role=='student').map(sc).join('')||empty('No students yet.')}</div></div>`;
+function profP(i){const u=U(i);if(!u||u.role!='student')return'<div class="w sec"><h2>Profile not found</h2></div>';const dn=db.jobs.filter(j=>j.hired==i&&j.status=='done'),rv=db.reviews.filter(r=>r.student==i);
+return`<div class="w sec"><div class="c st" style="align-items:flex-start;flex-wrap:wrap;gap:20px">${av(u,'xl')}<div style="flex:1;min-width:220px"><h2 style="margin-bottom:4px">${e(u.name)}</h2><p class=mu><i data-lucide=school></i>${e(u.college)}<br>${e(u.course)}</p>${stars(u.rating)} <span class=mu>(${rv.length} reviews)</span><div class=act style="margin-top:12px"><button class="b bp" onclick="cont('${i}')"><i data-lucide=message-circle></i>Contact</button><button class="b bo" onclick="hm('${i}')"><i data-lucide=user-check></i>Hire</button></div></div><div><b style="font-size:26px">${dn.length}</b><div class=mu>Completed jobs</div></div></div>
+<div class="two" style="margin-top:18px"><div class=c><h3>About</h3><p>${e(u.bio||'No bio yet.')}</p><h3>Education</h3><p>${e(u.edu||'—')}</p><h3>Certifications</h3><p>${e(u.certs||'—')}</p><h3>Experience</h3><p>${e(u.exp||'—')}</p><h3>Portfolio</h3><div class=g style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${u.portfolio.map(p=>`<div class=c style="background:var(--sf)"><b>${e(p.t)}</b><p class=mu style="margin:0">${e(p.d)}</p></div>`).join('')||empty('No portfolio items yet.')}</div></div>
+<aside><div class=c><h3>Skills</h3>${tags(u.skills)}</div><div class=c style="margin-top:18px"><h3>Previous projects</h3>${dn.map(j=>rw(e(j.title),inr(j.budget))).join('')||empty('No completed projects yet.')}</div><div class=c style="margin-top:18px"><h3>Reviews</h3>${rv.map(r=>`<p>${stars(r.rating)}<br>${e(r.text)}<br><span class=mu>${e(U(r.by)?.company||'Client')}</span></p>`).join('')||empty('No reviews yet.')}</div></aside></div></div>`}
+function cont(i){if(!me){toast('Log in to contact students','er');return go('#/login')}if(me.id==i)return;go('#/messages?to='+i)}
+function hm(i){if(!me){toast('Log in as a client to hire','er');return go('#/login')}if(me.role!='client')return toast('Only clients can hire students','er');const js=db.jobs.filter(j=>j.client==me.id&&j.status=='open');md(js.length?`<h3>Hire ${e(U(i).name)} for…</h3>`+js.map(j=>`<div class=rw><span>${e(j.title)}</span><button class="b bp sm" onclick="dh('${j.id}','${i}')">Hire</button></div>`).join(''):`<h3>No open projects</h3><p class=mu>Post a project first, then hire a student for it.</p><a class="b bp" href="#/dashboard" onclick="cm()">Post a project</a>`)}
+function dh(jid,sid){const j=J(jid);let a=db.apps.find(x=>x.job==jid&&x.student==sid);if(!a){a={id:id(),job:jid,student:sid,proposal:'Direct hire by client',bid:j.budget,status:'hired'};db.apps.push(a)}a.status='hired';j.status='active';j.hired=sid;db.apps.filter(x=>x.job==jid&&x!==a).forEach(x=>x.status='rejected');nt(sid,`You were hired for "${j.title}"!`);save();cm();toast('Student hired. The project is now active');go('#/dashboard');R()}
+
+/* ---------- AUTH ---------- */
+function getOtpKey(email){return 'sf_otp_'+(email||'').trim().toLowerCase();}
+function sendOtp(email){const em=(email||'').trim().toLowerCase();if(!EM.test(em)){toast('Enter a valid email to send OTP','er');return}const u=db.users.find(x=>x.email==em);if(!u){toast('No account found with that email','er');return}const code=String(Math.floor(100000+Math.random()*900000));const payload={code,expiry:Date.now()+120000};LS.s(getOtpKey(em),JSON.stringify(payload));const status=$('#otp-status');if(status)status.textContent=`OTP sent to ${em}. Demo code: ${code}`;toast('OTP sent successfully. Demo code: '+code)}
+function verifyOtp(email,code){const em=(email||'').trim().toLowerCase();const raw=LS.g(getOtpKey(em));if(!raw)return{ok:false,msg:'OTP expired or not requested. Please send a new code.'};const data=JSON.parse(raw);if(Date.now()>data.expiry){LS.d(getOtpKey(em));return{ok:false,msg:'OTP expired. Please send a new code.'};}if(!data.code||data.code!==String(code).trim()){return{ok:false,msg:'The OTP is incorrect.'};}LS.d(getOtpKey(em));return{ok:true}}
+const login=()=>`<div class="c auth" style="position:relative"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h2 style="margin:0">Welcome back</h2><div class=kebab-menu><button class=kebab-btn title="More options">⋮</button><div class=kebab-dropdown id=kebab-login><button class=kebab-item onclick="go('#/reset');R()"><i data-lucide=key></i>Reset password</button><button class=kebab-item onclick="go('#/register');R()"><i data-lucide=user-plus></i>Create student account</button><button class=kebab-item onclick="go('#/register?r=client');R()"><i data-lucide=briefcase></i>Create client account</button><button class=kebab-item onclick="go('#/');R()"><i data-lucide=home></i>Back to home</button></div></div></div><form onsubmit="return lg(event)"><div class=err id=fe></div><label>Email</label><input name=email type=email autocomplete=username><div class=otp-row><button class="b bo sm" type="button" onclick="sendOtp(this.form.email.value)">Send OTP</button></div><small class=otp-status id=otp-status>Use password or enter a 6-digit OTP.</small><label>OTP (optional)</label><input name=otp type=text inputmode=numeric maxlength=6 autocomplete=one-time-code placeholder="Enter 6-digit OTP"><label>Password</label><input name=password type=password autocomplete=current-password><p style="margin-top:14px"><button class="b bp" style="width:100%">Log in</button></p></form><p><a class=mu href="#/reset">Forgot password?</a> · <a href="#/register">Create account</a></p><div class=demo><b>Demo accounts</b><br>Student: aarav@student.com / Student@123<br>Client: riya@beanbrew.com / Client@123<br>Admin: admin@studentfreelance.com / Admin@123</div></div>`;
+async function lg(ev){ev.preventDefault();const f=ev.target,em=f.email.value.trim().toLowerCase(),pw=f.password.value,otpCode=(f.otp&&f.otp.value||'').trim(),er=[];if(!em)er.push('Enter your email.');else if(!EM.test(em))er.push('Enter a valid email address.');if(!pw&&!otpCode)er.push('Enter your password or a valid OTP code.');if(!er.length){const u=db.users.find(x=>x.email==em);if(!u)er.push('Account not found.');else if(otpCode){const checked=verifyOtp(em,otpCode);if(!checked.ok)er.push(checked.msg);else{me=u;LS.s('sf3s',u.id);toast('OTP verified. Welcome back, '+u.name.split(' ')[0]);go('#/dashboard');R();return false}}else if(u.pw!=await hash(pw))er.push('Email or password is incorrect.');else{me=u;LS.s('sf3s',u.id);toast('Welcome back, '+u.name.split(' ')[0]);go('#/dashboard');R();return false}}fe(er);return false}
+function reg(r){r=r=='client'?'client':'student';const s=r=='student';
+return`<div class="c auth" style="position:relative"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h2 style="margin:0">Create your account</h2><div class=kebab-menu><button class=kebab-btn title="More options">⋮</button><div class=kebab-dropdown><button class=kebab-item onclick="go('#/login');R()"><i data-lucide=log-in></i>Already have account?</button><button class=kebab-item onclick="go('#/');R()"><i data-lucide=home></i>Back to home</button></div></div></div><div class=tabs><a class="${s?'on':''}" href="#/register">I'm a student</a><a class="${s?'':'on'}" href="#/register?r=client">I'm a client</a></div><form onsubmit="return rg(event,'${r}')"><div class=err id=fe></div><label>Full name</label><input name=name><label>Email</label><input name=email type=email><label>Password</label><input name=password type=password autocomplete=new-password><small class=mu>8+ characters with upper, lower, number and symbol.</small>${s?`<label>College</label><input name=college><label>Course</label><input name=course><label>Skills (comma separated)</label><input name=skills placeholder="Python, Figma, SEO">`:`<label>Company / organization</label><input name=company><label>About your company</label><textarea name=about rows=3></textarea>`}<p style="margin-top:14px"><button class="b bp" style="width:100%">Create account</button></p></form><p>Already registered? <a href="#/login" style="color:var(--p)">Log in</a></p></div>`}
+async function rg(ev,r){ev.preventDefault();const f=ev.target,v=n=>f[n]?f[n].value.trim():'',er=[],em=v('email').toLowerCase();
+if(v('name').length<2)er.push('Enter your full name.');if(!EM.test(em))er.push('Enter a valid email address.');else if(db.users.some(u=>u.email==em))er.push('An account with this email already exists.');if(!PW.test(f.password.value))er.push(PWM);
+const sk=v('skills').split(',').map(x=>x.trim()).filter(Boolean);if(r=='student'){if(!v('college'))er.push('Enter your college.');if(!v('course'))er.push('Enter your course.');if(!sk.length)er.push('Add at least one skill.')}else if(!v('company'))er.push('Enter your company or organization.');
+if(er.length)return fe(er),false;const u={id:id(),role:r,name:v('name'),email:em,pw:await hash(f.password.value),photo:''};
+r=='student'?Object.assign(u,{college:v('college'),course:v('course'),skills:sk,rating:0,bio:'',edu:'',certs:'',exp:'',portfolio:[]}):Object.assign(u,{company:v('company'),about:v('about')});
+db.users.push(u);save();me=u;LS.s('sf3s',u.id);toast('Account created. Welcome to StudentFreelance!');go(r=='student'?'#/profile':'#/dashboard');R();return false}
+const reset=()=>`<div class="c auth" style="position:relative"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h2 style="margin:0">Reset password</h2><div class=kebab-menu><button class=kebab-btn title="More options">⋮</button><div class=kebab-dropdown><button class=kebab-item onclick="go('#/login');R()"><i data-lucide=log-in></i>Back to login</button><button class=kebab-item onclick="go('#/register');R()"><i data-lucide=user-plus></i>Create account</button><button class=kebab-item onclick="go('#/');R()"><i data-lucide=home></i>Back to home</button></div></div></div><p class=mu>Enter your account email and choose a new password.</p><form onsubmit="return rs(event)"><div class=err id=fe></div><label>Email</label><input name=email type=email><label>New password</label><input name=password type=password autocomplete=new-password><p style="margin-top:14px"><button class="b bp" style="width:100%">Reset password</button></p></form></div>`;
+async function rs(ev){ev.preventDefault();const f=ev.target,em=f.email.value.trim().toLowerCase(),er=[];if(!EM.test(em))er.push('Enter a valid email address.');if(!PW.test(f.password.value))er.push(PWM);const u=db.users.find(x=>x.email==em);if(!er.length&&!u)er.push('No account found with that email.');if(er.length)return fe(er),false;u.pw=await hash(f.password.value);save();toast('Password updated. Please log in.');go('#/login');return false}
+
+/* ---------- PROFILE EDIT ---------- */
+function editP(){const u=me,s=u.role=='student',f=(n,l,v,t='input')=>`<label>${l}</label><${t} name=${n}${t=='input'?` value="${e(v)}"`:' rows=3'}>${t=='input'?'':e(v)+'</textarea>'}`;
+return`<div class="w sec"><h2>Edit profile</h2><div class="two"><form class=c onsubmit="return ep(event)"><div class=err id=fe></div>${f('name','Full name',u.name)}${s?f('college','College',u.college)+f('course','Course',u.course)+f('skills','Skills (comma separated)',u.skills.join(', '))+f('bio','Bio',u.bio,'textarea')+f('edu','Education',u.edu,'textarea')+f('certs','Certifications',u.certs,'textarea')+f('exp','Experience',u.exp,'textarea'):f('company','Company / organization',u.company)+f('about','About',u.about,'textarea')}<p style="margin-top:14px"><button class="b bp">Save changes</button></p></form><aside class=c><h3>Profile picture</h3><div class=st>${av(u,'xl')}</div><label>Upload a photo</label><input type=file accept="image/*" onchange="ph(this)">${s?`<h3 style="margin-top:18px">Profile completion</h3><div class=bar><i style="width:${pct(u)}%"></i></div><p class=mu>${pct(u)}% complete</p>`:''}</aside></div></div>`}
+function ep(ev){ev.preventDefault();const f=ev.target,v=n=>f[n].value.trim(),er=[];if(v('name').length<2)er.push('Enter your full name.');if(me.role=='student'){if(!v('college'))er.push('Enter your college.');if(!v('course'))er.push('Enter your course.');if(!v('skills'))er.push('Add at least one skill.')}else if(!v('company'))er.push('Enter your company.');if(er.length)return fe(er),false;
+me.role=='student'?Object.assign(me,{name:v('name'),college:v('college'),course:v('course'),skills:v('skills').split(',').map(x=>x.trim()).filter(Boolean),bio:v('bio'),edu:v('edu'),certs:v('certs'),exp:v('exp')}):Object.assign(me,{name:v('name'),company:v('company'),about:v('about')});save();toast('Profile saved');go('#/dashboard');return false}
+function ph(inp){const f=inp.files[0];if(!f)return;if(!f.type.startsWith('image/')||f.size>4e6)return toast('Choose an image under 4 MB','er');const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=160;const s=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,160,160);me.photo=c.toDataURL('image/jpeg',.8);save();toast('Profile picture updated');R(1)};im.src=r.result};r.readAsDataURL(f)}
+
+/* ---------- STUDENT DASHBOARD ---------- */
+function sDash(){const m=me,my=db.apps.filter(a=>a.student==m.id),act=db.jobs.filter(j=>j.hired==m.id&&j.status=='active'),dn=db.jobs.filter(j=>j.hired==m.id&&j.status=='done'),sv=(db.saved[m.id]||[]).map(J).filter(Boolean),p=pct(m),
+rec=db.jobs.filter(j=>j.status=='open'&&!my.some(a=>a.job==j.id)).map(j=>[j,j.skills.filter(s=>m.skills.some(k=>k.toLowerCase()==s.toLowerCase())).length]).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0]),
+ns=db.notes.filter(n=>n.to==m.id).sort((a,b)=>b.t-a.t).slice(0,4),um=db.msgs.filter(x=>x.to==m.id&&!x.read).length;
+return`<div class="w sec"><h2>Hello, ${e(m.name.split(' ')[0])}</h2><div class=c style="margin-bottom:18px"><div class=rw style="border:0"><b>Profile completion: ${p}%</b><a class="b bo sm" href="#/profile">Complete profile</a></div><div class=bar><i style="width:${p}%"></i></div></div>
+<div class=g style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${stat('send','Applied jobs',my.length)}${stat('loader','Active projects',act.length)}${stat('check-circle-2','Completed',dn.length)}${stat('wallet','Earnings',inr(dn.reduce((a,j)=>a+j.budget,0)))}${stat('bookmark','Saved jobs',sv.length)}${stat('mail','Unread messages',um)}</div>
+<h3 style="margin:28px 0 12px">Recommended jobs</h3><div class=g>${rec.map(jc).join('')||empty('No recommendations yet.')}</div>
+<div class=g style="margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))"><div class=c><h3>Applied jobs</h3>${my.map(a=>rw(`<a href="#/job/${a.job}">${e(J(a.job)?.title)}</a>`,'Bid '+inr(a.bid),`<span class="pill ${a.status}">${a.status}</span>`)).join('')||empty('You have not applied yet.')}</div>
+<div class=c><h3>Active projects</h3>${act.map(j=>rw(e(j.title),e(U(j.client).company)+' · due '+j.deadline,inr(j.budget))).join('')||empty('No active projects.')}<h3 style="margin-top:16px">Completed projects</h3>${dn.map(j=>rw(e(j.title),e(U(j.client).company),inr(j.budget))).join('')||empty('Nothing completed yet.')}</div>
+<div class=c><h3>Saved jobs</h3>${sv.map(j=>rw(`<a href="#/job/${j.id}">${e(j.title)}</a>`,inr(j.budget),`<button class="b bo sm" onclick="sv('${j.id}')">Remove</button>`)).join('')||empty('Save jobs to find them here.')}</div>
+<div class=c><h3>Notifications <a class=mu style="font-size:13px" href="#/notifications">View all</a></h3>${ns.map(n=>rw(e(n.text),new Date(n.t).toLocaleDateString(),n.read?'':'<span class=bdg>new</span>')).join('')||empty('No notifications.')}<p><a class="b bo sm" href="#/messages"><i data-lucide=messages-square></i>Open messages</a></p></div></div>
+<div class=c style="margin-top:24px"><h3>Portfolio management</h3>${m.portfolio.map((p,i)=>rw('<b>'+e(p.t)+'</b>',e(p.d),`<button class="b bo sm" onclick="pfd(${i})">Delete</button>`)).join('')||empty('Add projects to show clients your work.')}<form onsubmit="return pfa(event)" style="margin-top:14px"><div class=err id=fe></div><div class=g style="grid-template-columns:1fr 2fr auto;align-items:end"><div><label>Title</label><input name=t></div><div><label>Description</label><input name=d></div><button class="b bp">Add project</button></div></form></div></div>`}
+function pfa(ev){ev.preventDefault();const f=ev.target,t=f.t.value.trim(),d=f.d.value.trim();if(t.length<3||d.length<5)return fe(['Add a title (3+ characters) and a short description (5+ characters).']),false;me.portfolio.push({t,d});save();toast('Portfolio project added');R(1);return false}
+const pfd=i=>{me.portfolio.splice(i,1);save();toast('Portfolio project removed');R(1)};
+
+/* ---------- CLIENT DASHBOARD ---------- */
+function cDash(){const mj=db.jobs.filter(j=>j.client==me.id),ids=mj.map(j=>j.id),ap=db.apps.filter(a=>ids.includes(a.job)),sl=ap.filter(a=>a.status=='shortlisted'),um=db.msgs.filter(x=>x.to==me.id&&!x.read).length,ns=db.notes.filter(n=>n.to==me.id).sort((a,b)=>b.t-a.t).slice(0,4);
+const ar=a=>{const u=U(a.student);return`<div class=rw><div class=st>${av(u)}<div><a href="#/student/${u.id}"><b>${e(u.name)}</b></a> <span class="pill ${a.status}">${a.status}</span><div class=mu style="font-size:13px">Bid ${inr(a.bid)} — ${e(a.proposal.slice(0,90))}</div></div></div><div class=act>${a.status=='pending'?`<button class="b bo sm" onclick="sl('${a.id}')">Shortlist</button>`:''}<button class="b bp sm" onclick="dh('${a.job}','${a.student}')">Hire</button><a class="b bo sm" href="#/messages?to=${u.id}">Contact</a></div></div>`};
+return`<div class="w sec"><h2>${e(me.company)} dashboard</h2><div class=g style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${stat('folder-open','Posted projects',mj.length)}${stat('loader','Active',mj.filter(j=>j.status=='active').length)}${stat('check-circle-2','Completed',mj.filter(j=>j.status=='done').length)}${stat('inbox','Applications',ap.length)}${stat('star','Shortlisted',sl.length)}${stat('mail','Unread messages',um)}</div>
+<div class=c style="margin-top:24px"><h3>Post a new project</h3><form onsubmit="return pj(event)"><div class=err id=fe></div><div class=g style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))"><div><label>Title</label><input name=title></div><div><label>Category</label><select name=cat>${cats.map(c=>`<option>${c[0]}</option>`).join('')}</select></div><div><label>Skills (comma separated)</label><input name=skills></div><div><label>Budget (₹)</label><input name=budget type=number min=500></div><div><label>Deadline</label><input name=deadline type=date min="${day(1)}"></div><div><label>Experience level</label><select name=level><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div><div><label>Job type</label><select name=type><option>Fixed</option><option>Part-time</option></select></div></div><label>Description</label><textarea name=desc rows=3></textarea><label>Requirements (one per line)</label><textarea name=reqs rows=2></textarea><p style="margin-top:14px"><button class="b bp"><i data-lucide=plus></i>Post project</button></p></form></div>
+<h3 style="margin:28px 0 12px">Project management</h3>${mj.map(j=>`<div class=c style="margin-bottom:14px"><div class=rw style="border:0"><div><h3 style="margin:0"><a href="#/job/${j.id}">${e(j.title)}</a></h3><span class=mu>${inr(j.budget)} · due ${j.deadline}</span></div><div class=act><span class="pill ${j.status}">${j.status}</span>${j.status=='active'?`<button class="b bp sm" onclick="fin('${j.id}')">Mark complete</button>`:''}<button class="b bo sm" onclick="dj_('${j.id}')">Delete</button></div></div>${j.hired?`<p class=mu>Hired: <a href="#/student/${j.hired}">${e(U(j.hired).name)}</a></p>`:''}${db.apps.filter(a=>a.job==j.id).map(ar).join('')||empty('No applications yet.')}</div>`).join('')||empty('You have not posted any projects yet.')}
+<div class=g style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))"><div class=c><h3>Shortlisted students</h3>${sl.map(a=>rw(`<a href="#/student/${a.student}">${e(U(a.student).name)}</a>`,e(J(a.job).title),`<button class="b bp sm" onclick="dh('${a.job}','${a.student}')">Hire</button>`)).join('')||empty('Shortlist applicants to compare them here.')}</div><div class=c><h3>Notifications <a class=mu style="font-size:13px" href="#/notifications">View all</a></h3>${ns.map(n=>rw(e(n.text),new Date(n.t).toLocaleDateString())).join('')||empty('No notifications.')}</div></div></div>`}
+function pj(ev){ev.preventDefault();const f=ev.target,v=n=>f[n].value.trim(),er=[],sk=v('skills').split(',').map(x=>x.trim()).filter(Boolean);if(v('title').length<5)er.push('Enter a project title (5+ characters).');if(!sk.length)er.push('Add at least one required skill.');if(!(+v('budget')>=500))er.push('Budget must be at least ₹500.');if(!v('deadline')||v('deadline')<=day(0))er.push('Choose a deadline in the future.');if(v('desc').length<20)er.push('Describe the project in at least 20 characters.');if(er.length)return fe(er),false;
+db.jobs.unshift({id:id(),title:v('title'),cat:v('cat'),skills:sk,budget:+v('budget'),level:v('level'),type:v('type'),desc:v('desc'),reqs:v('reqs').split('\n').map(x=>x.trim()).filter(Boolean),client:me.id,deadline:v('deadline'),status:'open',hired:null,n:0});save();toast('Project posted successfully');R(1);return false}
+const sl=i=>{const a=db.apps.find(x=>x.id==i);a.status='shortlisted';nt(a.student,`You were shortlisted for "${J(a.job).title}".`);save();toast('Student shortlisted');R(1)};
+function dj_(i){if(!confirm('Delete this project?'))return;db.jobs=db.jobs.filter(j=>j.id!=i);db.apps=db.apps.filter(a=>a.job!=i);save();toast('Project deleted');R(1)}
+function fin(jid){const j=J(jid),r=+prompt('Rate the student from 1 to 5','5');if(!(r>=1&&r<=5))return toast('Enter a rating between 1 and 5','er');j.status='done';db.reviews.push({student:j.hired,by:me.id,rating:r,text:'Completed "'+j.title+'" successfully.'});const rs=db.reviews.filter(x=>x.student==j.hired);U(j.hired).rating=+(rs.reduce((a,x)=>a+x.rating,0)/rs.length).toFixed(1);nt(j.hired,`"${j.title}" was marked complete. ${inr(j.budget)} added to your earnings.`);save();toast('Project marked complete');R(1)}
+
+/* ---------- MESSAGES & NOTIFICATIONS ---------- */
+function msgP(to){const mine=db.msgs.filter(x=>x.from==me.id||x.to==me.id),ps=[...new Set(mine.map(x=>x.from==me.id?x.to:x.from))];if(to&&U(to)&&!ps.includes(to))ps.unshift(to);const cur=to||ps[0];
+if(cur){db.msgs.filter(x=>x.from==cur&&x.to==me.id&&!x.read).forEach(x=>x.read=true);db.notes.filter(n=>n.to==me.id&&!n.read&&n.text.startsWith((U(cur).name)+' sent')).forEach(n=>n.read=true);save()}
+const th=cur?mine.filter(x=>x.from==cur||x.to==cur).sort((a,b)=>a.t-b.t):[],u=cur&&U(cur);
+return`<div class="w sec"><h2>Messages</h2><div class=msg><div class=c>${ps.map(p=>{const o=U(p);return`<a class="cv ${p==cur?'on':''}" href="#/messages?to=${p}">${av(o)}<div><b>${e(o.role=='client'?o.company:o.name)}</b><div class=mu style="font-size:12px">${e(o.name)}</div></div></a>`}).join('')||empty('No conversations yet. Contact a student or client to start.')}</div>
+<div class=c>${u?`<div class=st style="margin-bottom:8px">${av(u)}<b>${e(u.name)}</b></div><div class=th>${th.map(x=>`<div class="bub ${x.from==me.id?'me':''}">${e(x.text)}<small>${new Date(x.t).toLocaleString()}</small></div>`).join('')||empty('Say hello to start the conversation.')}</div><form onsubmit="return sm(event,'${cur}')" style="display:flex;gap:8px;margin-top:10px"><input name=text placeholder="Type a message" autocomplete=off aria-label=Message><button class="b bp"><i data-lucide=send></i>Send</button></form>`:empty('Select a conversation.')}</div></div></div>`}
+function sm(ev,to){ev.preventDefault();const t=ev.target.text.value.trim();if(!t)return toast('Type a message before sending','er'),false;db.msgs.push({id:id(),from:me.id,to,text:t,t:Date.now(),read:false});nt(to,me.name+' sent you a message.');save();R(1);
+const who=me.id;setTimeout(()=>{if(U(to)?.pw&&['s0','s1','s2','s3','s4','s5','c0','c1','c2','c3','c4'].includes(to)){db.msgs.push({id:id(),from:to,to:who,text:'Thanks for your message! I will get back to you shortly.',t:Date.now(),read:false});nt(who,U(to).name+' sent you a message.');save();me&&me.id==who&&location.hash.startsWith('#/messages')?R(1):nav()}},1800);return false}
+function notesP(){const ns=db.notes.filter(n=>n.to==me.id).sort((a,b)=>b.t-a.t);ns.forEach(n=>n.read=true);save();return`<div class="w sec"><h2>Notifications</h2><div class=c>${ns.map(n=>rw(`<i data-lucide=bell></i>${e(n.text)}`,new Date(n.t).toLocaleString())).join('')||empty('You are all caught up.')}</div></div>`}
+
+/* ---------- ADMIN ---------- */
+function admin(){const S=db.users.filter(u=>u.role=='student'),C=db.users.filter(u=>u.role=='client'),mx=Math.max(1,...cats.map(c=>db.jobs.filter(j=>j.cat==c[0]).length));
+return`<div class="w sec"><h2>Admin dashboard</h2><div class=g style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${stat('graduation-cap','Total students',S.length)}${stat('building-2','Total clients',C.length)}${stat('briefcase','Total jobs',db.jobs.length)}${stat('loader','Active projects',db.jobs.filter(j=>j.status=='active').length)}${stat('check-circle-2','Completed projects',db.jobs.filter(j=>j.status=='done').length)}${stat('flag','Open reports',db.reports.filter(r=>r.status=='open').length)}</div>
+<div class=c style="margin-top:24px"><h3>Platform statistics: jobs by category</h3>${cats.map(c=>{const n=db.jobs.filter(j=>j.cat==c[0]).length;return`<div class=rw style="border:0;padding:5px 0"><span style="width:130px">${c[0]}</span><div class=bar style="flex:1"><i style="width:${n/mx*100}%"></i></div><b>${n}</b></div>`}).join('')}</div>
+<div class=c style="margin-top:24px"><h3>User management</h3><div class=tbl><table><tr><th>Name<th>Email<th>Role<th></tr>${db.users.filter(u=>u.role!='admin').map(u=>`<tr><td>${e(u.name)}<td>${e(u.email)}<td><span class=tag>${u.role}</span><td><button class="b bo sm" onclick="du('${u.id}')">Delete</button></tr>`).join('')}</table></div></div>
+<div class=c style="margin-top:24px"><h3>Job management</h3><div class=tbl><table><tr><th>Title<th>Client<th>Budget<th>Status<th></tr>${db.jobs.map(j=>`<tr><td>${e(j.title)}<td>${e(U(j.client)?.company)}<td>${inr(j.budget)}<td><span class="pill ${j.status}">${j.status}</span><td><button class="b bo sm" onclick="dj_('${j.id}')">Delete</button></tr>`).join('')}</table></div></div>
+<div class=c style="margin-top:24px"><h3>Report management</h3><div class=tbl><table><tr><th>Job<th>Reported by<th>Reason<th>Status<th></tr>${db.reports.map(r=>`<tr><td>${e(J(r.job)?.title||'Deleted job')}<td>${e(U(r.by)?.name)}<td>${e(r.reason)}<td><span class="pill ${r.status=='open'?'':'done'}">${r.status}</span><td>${r.status=='open'?`<button class="b bp sm" onclick="rr('${r.id}')">Resolve</button>`:''}</tr>`).join('')||'<tr><td>No reports</tr>'}</table></div></div></div>`}
+function du(i){if(!confirm('Delete this user and their data?'))return;const js=db.jobs.filter(j=>j.client==i).map(j=>j.id);db.jobs=db.jobs.filter(j=>j.client!=i);db.apps=db.apps.filter(a=>a.student!=i&&!js.includes(a.job));db.users=db.users.filter(u=>u.id!=i);save();toast('User deleted');R(1)}
+const rr=i=>{db.reports.find(r=>r.id==i).status='resolved';save();toast('Report resolved');R(1)};
+
+/* ---------- CHATBOT ---------- */
+let chatHistory=[],chatState='start';
+const chatbot={
+  welcome:()=>'Hi! 👋 I\'m your Job Match Assistant. I analyze your resume and skills to find the perfect freelance jobs for you. Ready to get started?',
+  askName:()=>'What\'s your name?',
+  askLevel:()=>'What\'s your experience level?',
+  askCategory:()=>'Which area interests you most?',
+  askBudget:()=>'What\'s your minimum budget per project (in ₹)?',
+  analyze:(p)=>{if(!p)return 'Please log in as a student to analyze your profile.';const sk=p.skills||[],cat=cats.find(c=>db.jobs.filter(j=>j.cat==c[0]&&j.skills.some(s=>sk.includes(s))).length>0)?.[0];
+    const lvl=p.skills.length>=5?'Advanced':p.skills.length>=3?'Intermediate':'Beginner';const rec=db.jobs.filter(j=>j.status=='open'&&j.skills.some(s=>sk.includes(s))).sort((a,b)=>b.skills.filter(s=>sk.includes(s)).length-a.skills.filter(s=>sk.includes(s)).length).slice(0,4);
+    return rec.length?`Great! Based on your profile (${lvl} level, ${sk.length} skills), I found ${rec.length} perfect jobs for you:\n\n${rec.map(j=>`• ${j.title} (${inr(j.budget)})`).join('\n')}`:'No matching jobs found right now. Try exploring new skills!'},
+  suggest:(sk)=>{const rec=db.jobs.filter(j=>j.status=='open'&&sk.some(s=>j.skills.some(k=>k.toLowerCase().includes(s.toLowerCase())))).slice(0,3);
+    return rec.length?`I found ${rec.length} jobs that match your skills:\n\n${rec.map(j=>`• **${j.title}** - ${inr(j.budget)}\n   Skills: ${j.skills.slice(0,3).join(', ')}`).join('\n\n')}`:' No matching jobs. Try different skills!'}
+};
+function addMsg(t,b=false){const m=document.createElement('div');m.className='chat-msg '+(b?'bot':'user');const d=document.createElement('div');d.className='chat-text';d.innerHTML=t.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');m.append(d);$('#chat-messages').append(m);$('#chat-messages').scrollTop=$('#chat-messages').scrollHeight}
+function addSuggestions(opts){const d=document.createElement('div');d.className='chat-suggestions';opts.forEach(o=>{const b=document.createElement('button');b.className='chat-sugg';b.textContent=o;b.onclick=()=>{addMsg(o);chatReply(o)};d.append(b)});$('#chat-messages').append(d);$('#chat-messages').scrollTop=$('#chat-messages').scrollHeight}
+function chatReply(msg){msg=msg.trim().toLowerCase();const u=me;
+if(chatState=='start'){chatState='menu';addMsg(chatbot.welcome(),true);addSuggestions(u?['Analyze my profile','Browse jobs by skill','Find beginner projects','Find high-paying jobs']:[' Log in to analyze profile','Browse jobs','Learn about the platform'])}
+else if(chatState=='menu'){if(msg.includes('analyz')||msg.includes('profile')){if(!u){addMsg('You need to log in as a student first to analyze your profile.',true);addMsg('Would you like to log in?',true);addSuggestions(['Log in','Cancel'])}else{const r=chatbot.analyze(u);addMsg(r,true);addMsg('Would you like to apply to any of these jobs?',true);addSuggestions(['Show details','Back to menu','Change filters'])}}
+else if(msg.includes('log in')){addMsg('Redirecting to login page...',true);setTimeout(()=>{go('#/login');ccm()},500)}
+else if(msg.includes('browse')||msg.includes('skill')){if(!u){addMsg('Please log in first.',true);return}addMsg('Tell me your main skills (e.g., React, Python, Figma)',true);chatState='askSkills'}
+else if(msg.includes('beginner')){const b=db.jobs.filter(j=>j.status=='open'&&j.level=='Beginner').slice(0,4);addMsg(`Found ${b.length} beginner jobs:\n\n${b.map(j=>`• ${j.title} - ${inr(j.budget)}`).join('\n')}`,true);addSuggestions(['Show more','Back to menu','Apply now'])}
+else if(msg.includes('high-pay')||msg.includes('high pay')){const b=db.jobs.filter(j=>j.status=='open').sort((a,b)=>b.budget-a.budget).slice(0,4);addMsg(`Here are the highest-paying jobs:\n\n${b.map(j=>`• ${j.title} - ${inr(j.budget)}`).join('\n')}`,true);addSuggestions(['Browse jobs','Back to menu','Apply now'])}
+else if(msg.includes('back')){chatState='menu';addMsg('What would you like to do?',true);addSuggestions(['Analyze my profile','Browse jobs by skill','Find beginner projects','Find high-paying jobs'])}}
+else if(chatState=='askSkills'){const sk=msg.split(/[,\s]+/).filter(s=>s.length>2);if(sk.length){const r=chatbot.suggest(sk);addMsg(r,true);addMsg('Want to apply to any of these?',true);addSuggestions(['Show more','Browse by category','Back to menu'])}else addMsg('Please tell me your main skills.',true)}}
+function ocb(){$('#chatbox').style.display='flex';$('#chat-messages').innerHTML='';chatHistory=[];chatState='start';addMsg(chatbot.welcome(),true);addSuggestions(me?['Analyze my profile','Browse jobs by skill','Find beginner projects','Find high-paying jobs']:['Log in to analyze','Browse all jobs','Learn about platform']);setTimeout(()=>lucide.createIcons(),50)}
+function ccm(){$('#chatbox').style.display='none'}
+$('#chatbot-btn').onclick=()=>$('#chatbox').style.display=='none'?ocb():ccm();
+$('#close-chat').onclick=ccm;
+$('#chat-send').onclick=()=>{const t=$('#chat-input').value.trim();if(!t)return;addMsg(t);$('#chat-input').value='';chatReply(t);setTimeout(()=>lucide.createIcons(),50)};
+$('#chat-input').onkeypress=ev=>{if(ev.key=='Enter')$('#chat-send').click()};
+
+(async()=>{try{db=JSON.parse(LS.g('sf3'))}catch(_){}if(!db||!db.users){await seed();save()}const s=LS.g('sf3s');me=s&&U(s)||null;addEventListener('hashchange',()=>R());R();lucide.createIcons()})();
+</script></body>
+</html>
